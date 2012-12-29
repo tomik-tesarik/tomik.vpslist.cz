@@ -8,4 +8,5 @@ if [ -z "$MY_PATH" ] ; then
 fi
 GIT_WORK_TREE="$MY_PATH"
 export GIT_WORK_TREE
+git pull
 git checkout -f
