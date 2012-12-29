@@ -1,6 +1,10 @@
 #!/bin/sh
-MY_PATH="`dirname \"$0\"`"
-echo "$MY_PATH"
-GIT_WORK_TREE=/home/path/to/your/www
-#export GIT_WORK_TREE
-#git checkout -f
+MY_PATH="`( cd \"$MY_PATH\" && pwd )`"  # absolutized and normalized
+if [ -z "$MY_PATH" ] ; then
+  # error; for some reason, the path is not accessible
+  # to the script (e.g. permissions re-evaled after suid)
+  exit 1  # fail
+fi
+GIT_WORK_TREE="$MY_PATH"
+export GIT_WORK_TREE
+git checkout -f
